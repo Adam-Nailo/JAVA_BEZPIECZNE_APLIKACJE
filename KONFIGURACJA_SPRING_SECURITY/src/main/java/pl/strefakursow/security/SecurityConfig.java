@@ -15,26 +15,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextHolderStrategy;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-import java.util.List;
-
-/**
- *
- */
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    private AlwaysAllowFilter alwaysAllowFilter;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.antMatcher("/**")
-                .addFilterAfter(alwaysAllowFilter,
-                        BasicAuthenticationFilter.class)
                 .authorizeRequests().anyRequest()
                 .authenticated()
                 .and()
-                .formLogin();
+                .httpBasic();
     }
 
     @Configuration
@@ -44,20 +34,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             return SecurityContextHolder.getContextHolderStrategy();
         }
     }
-
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.authenticationProvider(new AuthenticationProvider() {
-//            @Override
-//            public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-//                return new UsernamePasswordAuthenticationToken("any principal", "any credentials",
-//                        List.of(new SimpleGrantedAuthority("USER")));
-//            }
-//
-//            @Override
-//            public boolean supports(Class<?> aClass) {
-//                return true;
-//            }
-//        });
-//    }
 }
