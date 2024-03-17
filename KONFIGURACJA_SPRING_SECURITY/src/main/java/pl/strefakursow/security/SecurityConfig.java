@@ -18,6 +18,12 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 @Configuration
 public class SecurityConfig {
+
+    @Autowired
+    public void configureAuthenticationManager(AuthenticationManagerBuilder builder, SecretAuthenticationProvider provider) {
+        builder.authenticationProvider(provider);
+    }
+
     @Order(0)
     @Configuration
     public static class HttpBasicConfig extends WebSecurityConfigurerAdapter {
