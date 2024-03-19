@@ -1,4 +1,4 @@
-package pl.strefakursow.security;
+package pl.strefakursow.security.secret;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -10,7 +10,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class SecretAuthenticationProvider implements AuthenticationProvider {
@@ -25,18 +24,8 @@ public class SecretAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String secret = (String) authentication.getCredentials();
         return secretUserRepository.loadBySecret(secret).map(u -> {
-            AbstractAuthenticationToken authResult = new AbstractAuthenticationToken(List.of(new SimpleGrantedAuthority("ROLE_USER"))) {
-
-                @Override
-                public Object getCredentials() {
-                    return secret;
-                }
-
-                @Override
-                public Object getPrincipal() {
-                    return u.getUsername();
-                }
-            };
+            AbstractAuthenticationToken authResult = new SecretToken(
+                    List.of(new SimpleGrantedAuthority("ROLE_USER")), secret, u);
             authResult.setAuthenticated(true);
             return authResult;
         }).orElseThrow(() -> new BadCredentialsException("Bad secret"));
@@ -45,6 +34,6 @@ public class SecretAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return UsernamePasswordAuthenticationToken.class.equals(authentication);
+        return UsernamePasswordAuthenticationToken.class.equals(authentication) || SecretToken.class.equals(authentication);
     }
 }

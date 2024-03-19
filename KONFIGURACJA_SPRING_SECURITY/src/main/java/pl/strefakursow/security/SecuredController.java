@@ -20,4 +20,9 @@ public class SecuredController {
     public String formLogin() {
         return "login";
     }
+
+    @GetMapping("/secured-secret")
+    public String secretPage() {
+        return "secured-secret";
+    }
 }

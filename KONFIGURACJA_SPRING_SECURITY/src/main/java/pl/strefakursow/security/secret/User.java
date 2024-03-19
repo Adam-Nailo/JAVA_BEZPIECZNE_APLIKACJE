@@ -1,4 +1,4 @@
-package pl.strefakursow.security;
+package pl.strefakursow.security.secret;
 
 import lombok.Value;
 
