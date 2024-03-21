@@ -16,7 +16,7 @@ import pl.strefakursow.security.secret.SecretAuthenticationProvider;
 import pl.strefakursow.security.secret.SecretTokenFilter;
 
 @Configuration
-@EnableGlobalMethodSecurity(jsr250Enabled = true)
+@EnableGlobalMethodSecurity(jsr250Enabled = true,prePostEnabled = true)
 public class SecurityConfig {
 
     @Autowired
