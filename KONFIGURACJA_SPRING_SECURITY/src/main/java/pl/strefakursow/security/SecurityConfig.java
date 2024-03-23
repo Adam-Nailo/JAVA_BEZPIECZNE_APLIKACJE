@@ -1,6 +1,7 @@
 package pl.strefakursow.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -12,19 +13,29 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextHolderStrategy;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import pl.strefakursow.security.secret.SecretAuthenticationProvider;
 import pl.strefakursow.security.secret.SecretTokenFilter;
 
 @Configuration
-@EnableGlobalMethodSecurity(jsr250Enabled = true,prePostEnabled = true)
+@EnableGlobalMethodSecurity(jsr250Enabled = true, prePostEnabled = true)
 public class SecurityConfig {
+
+    @Autowired
+    @Qualifier("inMemoryMap")
+    private UserDetailsService userDetailsService;
 
     @Autowired
     public void configureAuthenticationManager(
             AuthenticationManagerBuilder builder,
             SecretAuthenticationProvider provider) throws Exception {
-        builder.authenticationProvider(provider)
+        builder
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(NoOpPasswordEncoder.getInstance())
+                .and()
+                .authenticationProvider(provider)
                 .inMemoryAuthentication().withUser("user")
                 .password("{noop}user").roles("USER")
                 .and().withUser("admin")
