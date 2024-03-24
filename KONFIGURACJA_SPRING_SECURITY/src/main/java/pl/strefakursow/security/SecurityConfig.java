@@ -14,7 +14,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextHolderStrategy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import pl.strefakursow.security.secret.SecretAuthenticationProvider;
 import pl.strefakursow.security.secret.SecretTokenFilter;
@@ -26,6 +28,8 @@ public class SecurityConfig {
     @Autowired
     @Qualifier("inMemoryMap")
     private UserDetailsService userDetailsService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public void configureAuthenticationManager(
@@ -33,7 +37,7 @@ public class SecurityConfig {
             SecretAuthenticationProvider provider) throws Exception {
         builder
                 .userDetailsService(userDetailsService)
-                .passwordEncoder(NoOpPasswordEncoder.getInstance())
+                .passwordEncoder(passwordEncoder)
                 .and()
                 .authenticationProvider(provider)
                 .inMemoryAuthentication().withUser("user")
@@ -44,6 +48,14 @@ public class SecurityConfig {
                 .password("{noop}editor").roles("EDITOR")
                 .and().withUser("reader")
                 .password("{noop}reader").roles("USER");
+    }
+
+    @Configuration
+    public static class PasswordEncoderConfig{
+        @Bean
+        public PasswordEncoder passwordEncoder(){
+            return new BCryptPasswordEncoder();
+        }
     }
 
     @Order(0)

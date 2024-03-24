@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,9 +17,9 @@ public class InMemoryMapUserDetailsService implements UserDetailsService {
 
     private ConcurrentMap<String, UserDetails> users;
 
-    public InMemoryMapUserDetailsService() {
+    public InMemoryMapUserDetailsService(PasswordEncoder passwordEncoder) {
         users = new ConcurrentHashMap<>();
-        users.put("goobar", new User("goobar", "goobar", List.of(new SimpleGrantedAuthority("ROLE_USER"))));
+        users.put("goobar", new User("goobar", passwordEncoder.encode("goobar"), List.of(new SimpleGrantedAuthority("ROLE_USER"))));
     }
 
     @Override
