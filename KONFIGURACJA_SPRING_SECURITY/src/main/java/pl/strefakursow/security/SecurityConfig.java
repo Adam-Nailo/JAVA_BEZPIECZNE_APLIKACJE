@@ -34,26 +34,16 @@ public class SecurityConfig {
     @Autowired
     public void configureAuthenticationManager(
             AuthenticationManagerBuilder builder,
-            SecretAuthenticationProvider provider) throws Exception {
-        builder
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder)
-                .and()
-                .authenticationProvider(provider)
-                .inMemoryAuthentication().withUser("user")
-                .password("{noop}user").roles("USER")
-                .and().withUser("admin")
-                .password("{noop}admin").roles("ADMIN")
-                .and().withUser("editor")
-                .password("{noop}editor").roles("EDITOR")
-                .and().withUser("reader")
-                .password("{noop}reader").roles("USER");
+            SecretAuthenticationProvider secretProvider) throws Exception {
+        builder.userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder).and()
+                .authenticationProvider(secretProvider);
     }
 
     @Configuration
-    public static class PasswordEncoderConfig{
+    public static class PasswordEncoderConfig {
         @Bean
-        public PasswordEncoder passwordEncoder(){
+        public PasswordEncoder passwordEncoder() {
             return new BCryptPasswordEncoder();
         }
     }

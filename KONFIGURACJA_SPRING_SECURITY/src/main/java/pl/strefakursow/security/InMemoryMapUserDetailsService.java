@@ -19,7 +19,23 @@ public class InMemoryMapUserDetailsService implements UserDetailsService {
 
     public InMemoryMapUserDetailsService(PasswordEncoder passwordEncoder) {
         users = new ConcurrentHashMap<>();
-        users.put("goobar", new User("goobar", passwordEncoder.encode("goobar"), List.of(new SimpleGrantedAuthority("ROLE_USER"))));
+        users.put("goobar", user("goobar", passwordEncoder));
+        users.put("user", user("user", passwordEncoder));
+        users.put("admin", userWithRole("admin", passwordEncoder, "ROLE_ADMIN"));
+        users.put("editor", userWithRole("editor", passwordEncoder, "ROLE_EDITOR"));
+        users.put("reader", user("reader", passwordEncoder));
+    }
+
+    private UserDetails user(String username,
+                             PasswordEncoder passwordEncoder) {
+        return userWithRole(username, passwordEncoder, "ROLE_USER");
+    }
+
+    private UserDetails userWithRole(String username,
+                                     PasswordEncoder passwordEncoder,
+                                     String role) {
+        return new User(username, passwordEncoder.encode(username),
+                List.of(new SimpleGrantedAuthority(role)));
     }
 
     @Override
