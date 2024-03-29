@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Transfer Success</title>
+</head>
+<body>
+
+<form action="http://localhost:8080/secured-form/transfer" method="post">
+    From <input name="fromAccount" type="text"/>
+    To <input name="toAccount" type="text"/>
+    Amount <input name="amount" type="number"/>
+    <input type="submit" value="Transfer">
+</form>
+
+<p>
+    Transfer from <span th:text="${from}">Account123</span> to
+    <span th:text="${to}">Account456</span>. Amount: <span
+        th:text="${amount}">100.00</span>.
+</p>
+</body>
+</html>
