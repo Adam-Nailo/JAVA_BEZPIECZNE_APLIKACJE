@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>XSS Safe Page</title>
+</head>
+<body>
+<form action="/xss/safe" method="post">
+    Say my name: <input name="name" type="text" value="Heisenberg"/>
+    <input type="submit" value="Send">
+</form>
+My name is: <span th:text="${name}"/>
+</body>
+</html>

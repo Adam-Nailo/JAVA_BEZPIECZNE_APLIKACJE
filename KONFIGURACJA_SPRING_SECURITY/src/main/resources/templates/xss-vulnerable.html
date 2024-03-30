@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XSS Vulnerable page</title>
+</head>
+<body>
+<form action="/xss/vulnerable" method="post">
+    Say my name: <input name="name" type="text" value="Heisenberg"/>
+    <input type="submit" value="Send">
+</form>
+My name is: ${name}
+</body>
+</html>
