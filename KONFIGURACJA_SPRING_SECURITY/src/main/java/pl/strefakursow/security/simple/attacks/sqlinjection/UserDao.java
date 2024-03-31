@@ -1,4 +1,4 @@
-package pl.strefakursow.security.attacks.sqlinjection;
+package pl.strefakursow.security.simple.attacks.sqlinjection;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;

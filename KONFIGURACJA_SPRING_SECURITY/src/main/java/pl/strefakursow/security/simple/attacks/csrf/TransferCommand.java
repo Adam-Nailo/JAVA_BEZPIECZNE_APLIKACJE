@@ -1,4 +1,4 @@
-package pl.strefakursow.security.attacks.csrf;
+package pl.strefakursow.security.simple.attacks.csrf;
 
 import lombok.Data;
 

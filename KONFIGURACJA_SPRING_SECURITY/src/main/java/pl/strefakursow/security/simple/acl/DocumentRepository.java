@@ -1,4 +1,4 @@
-package pl.strefakursow.security.acl;
+package pl.strefakursow.security.simple.acl;
 
 import org.springframework.stereotype.Component;
 

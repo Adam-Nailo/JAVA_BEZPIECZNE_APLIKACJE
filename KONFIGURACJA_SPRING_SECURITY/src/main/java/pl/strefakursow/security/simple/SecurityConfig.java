@@ -1,4 +1,4 @@
-package pl.strefakursow.security;
+package pl.strefakursow.security.simple;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,11 +15,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextHolderStrategy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import pl.strefakursow.security.secret.SecretAuthenticationProvider;
-import pl.strefakursow.security.secret.SecretTokenFilter;
+import pl.strefakursow.security.simple.secret.SecretAuthenticationProvider;
+import pl.strefakursow.security.simple.secret.SecretTokenFilter;
 
 @Configuration
 @EnableGlobalMethodSecurity(jsr250Enabled = true, prePostEnabled = true)

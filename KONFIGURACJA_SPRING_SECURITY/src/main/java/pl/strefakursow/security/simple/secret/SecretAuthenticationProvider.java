@@ -1,4 +1,4 @@
-package pl.strefakursow.security.secret;
+package pl.strefakursow.security.simple.secret;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationProvider;

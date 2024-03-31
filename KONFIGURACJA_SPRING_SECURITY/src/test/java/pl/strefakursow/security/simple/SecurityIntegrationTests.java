@@ -1,4 +1,4 @@
-package pl.strefakursow.security;
+package pl.strefakursow.security.simple;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

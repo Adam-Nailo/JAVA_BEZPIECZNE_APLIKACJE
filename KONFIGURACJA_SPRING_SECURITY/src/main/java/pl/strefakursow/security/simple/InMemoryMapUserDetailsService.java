@@ -1,4 +1,4 @@
-package pl.strefakursow.security;
+package pl.strefakursow.security.simple;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

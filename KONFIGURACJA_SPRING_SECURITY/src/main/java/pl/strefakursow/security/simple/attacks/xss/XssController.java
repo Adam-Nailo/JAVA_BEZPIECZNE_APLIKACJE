@@ -1,4 +1,4 @@
-package pl.strefakursow.security.attacks.xss;
+package pl.strefakursow.security.simple.attacks.xss;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
