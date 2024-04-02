@@ -1,4 +1,4 @@
-package pl.strefakursow.security.oauth2;
+package pl.strefakursow.security.oauth2.client;
 
 import lombok.Data;
 

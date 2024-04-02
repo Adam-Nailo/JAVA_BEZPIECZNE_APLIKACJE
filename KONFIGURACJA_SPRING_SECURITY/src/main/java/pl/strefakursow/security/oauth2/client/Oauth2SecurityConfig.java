@@ -1,4 +1,4 @@
-package pl.strefakursow.security.oauth2;
+package pl.strefakursow.security.oauth2.client;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
