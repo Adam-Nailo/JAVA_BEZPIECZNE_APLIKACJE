@@ -1,0 +1,12 @@
+{
+  "sub": "subject",
+  "exp": 2164245648,
+  "authorities": [
+    "ROLE_USER"
+  ],
+  "jti": "cb5dc046-0922-4dbf-a930-8b63aae63f96",
+  "client_id": "reader",
+  "scope": [
+    "message:read"
+  ]
+}
